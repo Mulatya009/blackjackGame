@@ -12,4 +12,5 @@ Both players have to randomly pick cards and see the value. the value of the tot
 The winner is decided by the game by taking the player who did not exeed 21 points when making the choices(who did not Burst) and has higher points than the opponent.
 
 #Steps
+
 The human player plays by HIT button. once he/she is through, then he/she hits the stand button and the Bot plays and the final results are calculated once Bot is through and the winner is decided. 
