@@ -3,14 +3,29 @@
     padding: 2px;
     height: 450px;
 }
+
 #green_div div{
     padding: 5px;
     flex: 1;
     text-align: center;
 }
+
+#general{
+    height: 450px;
+    position: relative;
+    margin-top: -450px;
+}
+
+#general div{
+    height: 445px;
+    width: 100%;
+    background-color: rgba(230, 230, 230, .95752);
+}
+
 #row-btn{
     background-image: url("../images/bg.jpg");
 }
+
 #row-btn button{
     margin: 5px;
 }
