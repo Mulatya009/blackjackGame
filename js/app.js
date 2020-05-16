@@ -7,7 +7,8 @@ blackjackGame = {
     "wins": 0,
     "loses": 0,
     "ties": 0,
-    "all": 0, 
+    "all": 0,
+    "total": 0, 
     "isStand": false,
     "turnsOver": false,
     "gameOver": false,
@@ -45,7 +46,6 @@ function blackjackHit(e){
     }    
 }
 
-
 function randomCard(){
     let randomIndex = Math.floor(Math.random() * 13);
     return blackjackGame['cards'][randomIndex];
@@ -55,7 +55,7 @@ function showCard(activePlayer, card){
     if(activePlayer['score'] <= 21){
         let cardImg = document.createElement('img');
         cardImg.src = `images/${card}.png`;
-        cardImg.style.height = '200px';
+        cardImg.style.height = '175px';
         cardImg.style.margin = '5px';
         document.querySelector(activePlayer['div']).appendChild(cardImg);
         hitSound.play();
@@ -92,7 +92,8 @@ function blackjackDeal(){
             dSpan.classList.remove('alert-danger', 'alert-success', 'text-danger', 'text-success');
             dSpan.textContent = DEALER['score'];
 
-            document.querySelector('#game-results').textContent = 'Let\'s play';
+            document.querySelector('#game-results').textContent = 'Let\'s play this round';
+            document.querySelector('#game-results').style.color = 'black';
 
             blackjackGame['turnsOver'] = true;        
         } 
@@ -223,8 +224,24 @@ function showResult(winner){
 }
 
 function generalWinner(){
+    const totalGames = 10;
+    blackjackGame['total'] = totalGames;
     
-    if(blackjackGame['all'] === 10){
+    if ( (blackjackGame['wins'] - blackjackGame['loses']) > (totalGames - blackjackGame['all']) ) {
+        blackjackGame['gameOver'] = true;
+        document.getElementById('stand-button').disabled = true;
+        let generalWinner = computeGeneralWinner();
+        showGeneralWinner(generalWinner)
+    }
+
+    else if ((blackjackGame['loses'] - blackjackGame['wins']) > (totalGames - blackjackGame['all'])) {
+        blackjackGame['gameOver'] = true;
+        document.getElementById('stand-button').disabled = true;
+        let generalWinner = computeGeneralWinner();
+        showGeneralWinner(generalWinner)
+    }
+    
+    else if(blackjackGame['all'] === totalGames){
         blackjackGame['gameOver'] = true;
         document.getElementById('stand-button').disabled = true;
         let generalWinner = computeGeneralWinner();
@@ -252,21 +269,30 @@ function showGeneralWinner(generalWinner){
 
     if(generalWinner === YOU){
         message = 'CONGRATS! YOU ARE THE WINNER';
-        messageColor = 'text-success';
+        messageColor = 'success';
         btnText = 'Well done winner! Let\'s play again'; 
         youWin.play();
+        lostSound.pause();
+        winSound.pause();
+        roundDraw.pause();
         gameOver.play();
     }
     else if(generalWinner === DEALER){
         message = 'SORRY! YOU ARE THE LOSER';
-        messageColor = 'text-danger';
+        messageColor = 'danger';
         btnText = 'Hey friend! I knew i would win, try your luck again'; 
+        lostSound.pause();
+        winSound.pause();
+        roundDraw.pause();
         gameOver.play();
     }
     else{
         message = 'VERY TIGHT! YOU DREW';
-        messageColor = 'text-primary';
+        messageColor = 'primary';
         btnText = 'Hey friend! Let\'s break the tie'; 
+        lostSound.pause();
+        winSound.pause();
+        roundDraw.pause();
         gameOver.play();
     }
 
@@ -276,13 +302,30 @@ function showGeneralWinner(generalWinner){
     resultsWrapper.innerHTML = `
         <div class="text-center pt-5">
             <h1 class="text-center text-warning mb-4">GAME OVER</h1>
-            <br>
-            <h4 class="mt-3 text-center ${messageColor}">${message}</h4>
+            <h4 class="mt-3 text-center text-${messageColor}">${message}</h4>
+            <table class="table-bordered table-two mt-3">
+                <tr>
+                    <th class="px-3 py-1 text-center border-secondary text-info">You</th>
+                    <th class="px-3 py-1 text-center border-secondary text-info">Dealer</th>
+                    <th class="px-3 py-1 text-center border-secondary text-info">Draws</th>
+                    <th class="px-3 py-1 text-center border-secondary text-info">Played rounds</th>
+                    <th class="px-3 py-1 text-center border-secondary text-info">Max rounds</th>
+                </tr>
+                <tr>                    
+                    <td class="px-3 py-1 text-center border-secondary bg-${messageColor}">${blackjackGame['wins']}</td>
+                    <td class="px-3 py-1 text-center border-secondary">${blackjackGame['loses']}</td>
+                    <td class="px-3 py-1 text-center border-secondary">${blackjackGame['ties']}</td>
+                    <td class="px-3 py-1 text-center border-secondary">${blackjackGame['all']}</td>
+                    <td class="px-3 py-1 text-center border-secondary">${blackjackGame['total']}</td>
+                </tr>
+            </table>
             <button id="play-again" class="btn btn-info mt-2" onClick="playAgain()">${btnText}</button>
         </div>
     `;
-
-    document.querySelector('#game-results').textContent = 'Let\'s play';
+    document.querySelector('#game-results').parentElement.remove();
+    document.querySelector('.table-one').remove();
+    document.getElementById('user-assist').remove();
+ 
     
 }
 
@@ -312,19 +355,12 @@ function playAgain(){
         for(let i = 0; i < dealerImages.length; i++){
             dealerImages[i].remove();
         }
-
+        
         ySpan.classList.remove('alert-danger', 'alert-success', 'text-danger', 'text-success');
         ySpan.textContent = YOU['score'];
 
         dSpan.classList.remove('alert-danger', 'alert-success', 'text-danger', 'text-success');
         dSpan.textContent = DEALER['score'];
-
-        document.querySelector('#wins').textContent = blackjackGame['wins'];
-        document.getElementById('loses').textContent = blackjackGame['loses'];
-        document.getElementById('draws').textContent = blackjackGame['ties'];
-
-        document.querySelector('#total').textContent = blackjackGame['wins'] + blackjackGame['loses'] + blackjackGame['ties'];
-
         
     }
 

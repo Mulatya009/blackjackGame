@@ -1,7 +1,7 @@
 #green_div{
     background-image: url("../images/bg.jpg");
     padding: 2px;
-    height: 450px;
+    height: 421px;
 }
 
 #green_div div{
@@ -11,13 +11,13 @@
 }
 
 #general{
-    height: 450px;
+    height: 421px;
     position: relative;
-    margin-top: -450px;
+    margin-top: -421px;
 }
 
 #general div{
-    height: 445px;
+    height: 420px;
     width: 100%;
     background-color: rgba(230, 230, 230, .95752);
 }
@@ -28,4 +28,8 @@
 
 #row-btn button{
     margin: 5px;
+}
+.table-two{
+    margin: 0 auto;
+    margin-bottom: 10px;
 }

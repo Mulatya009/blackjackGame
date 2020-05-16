@@ -18,9 +18,17 @@
 
     <div class="container mt-1">
         <h4 class="text-center text-success">BLACKJACK GAME</h4>
-        <div id="game-container" class="px-5 mt-2">            
-            <div class="d-flex justify-content-center">
-                <h6 class="text-center bg-warning px-3 py-1 text-light"><span id="game-results">Let's play</span></h6>
+        <div id="game-container" class="px-5 mt-0">            
+            <div class="">
+                <div class="row" id="user-assist">
+                    <div class="col-6">
+                        <button class="btn-sm btn-outline-success">help</button>
+                    </div>
+                    <div class="col-6 text-right">
+                        <button class="btn-sm btn-outline-danger">tips</button>
+                    </div>
+                </div>
+                <h6 class="text-center py-1 text-dark"><span id="game-results">Let's play</span></h6>
             </div>
             <!-- cards -->
             <div class="row d-flex justify-content-around" id="green_div">
@@ -43,18 +51,19 @@
             </div>
             <!-- results -->
             <div class="row d-flex justify-content-center mt-2" id="general-results">
-                <table class="table-bordered">
+                <table class="table-bordered table-one">
                     <tr>
-                        <th class="px-3 py-1 text-center">Total</th>
-                        <th class="px-3 py-1 text-center">Wins</>
-                        <th class="px-3 py-1 text-center">Loses</th>
-                        <th class="px-3 py-1 text-center">Draws</th>
+                        <th class="px-3 py-1 text-center border-secondary text-success">You</th>
+                        <th class="px-3 py-1 text-center border-secondary text-success">Dealer</th>
+                        <th class="px-3 py-1 text-center border-secondary text-success">Draws</th>
+                        <th class="px-3 py-1 text-center border-secondary text-success">Total</th>
+
                     </tr>
-                    <tr>
-                        <td class="px-3 py-1 text-center"><span id="total">0</span></td>
-                        <td class="px-3 py-1 text-center"><span id="wins">0</span></td>
-                        <td class="px-3 py-1 text-center"><span id="loses">0</span></td>
-                        <td class="px-3 py-1 text-center"><span id="draws">0</span></td>
+                    <tr>                        
+                        <td class="px-3 py-1 text-center border-secondary"><span id="wins">0</span></td>
+                        <td class="px-3 py-1 text-center border-secondary"><span id="loses">0</span></td>
+                        <td class="px-3 py-1 text-center border-secondary"><span id="draws">0</span></td>
+                        <td class="px-3 py-1 text-center border-secondary"><span id="total">0</span></td>
                     </tr>
                 </table>
             </div>
