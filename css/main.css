@@ -1,7 +1,7 @@
 #green_div{
     background-image: url("../images/bg.jpg");
     padding: 2px;
-    height: 421px;
+    height: 450px;
 }
 
 #green_div div{
@@ -11,13 +11,13 @@
 }
 
 #general{
-    height: 421px;
+    height: 450px;
     position: relative;
-    margin-top: -421px;
+    margin-top: -450px;
 }
 
 #general div{
-    height: 420px;
+    height: 448px;
     width: 100%;
     background-color: rgba(230, 230, 230, .95752);
 }

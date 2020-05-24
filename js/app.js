@@ -17,6 +17,13 @@ blackjackGame = {
 // Global constants
 const YOU = blackjackGame['you'];
 const DEALER = blackjackGame['dealer'];
+
+// user instructions
+const instructionBtn = document.querySelectorAll('.to-user');
+const modalTitle = document.querySelector('.modal-title');
+const contentHead = document.querySelector('.modal-body h6');
+let modalContent = document.querySelector('.modal-body .instructions');
+
 // Sounds
 const hitSound = new Audio('sounds/swish.m4a');
 const winSound = new Audio('sounds/cash.mp3');
@@ -55,7 +62,7 @@ function showCard(activePlayer, card){
     if(activePlayer['score'] <= 21){
         let cardImg = document.createElement('img');
         cardImg.src = `images/${card}.png`;
-        cardImg.style.height = '175px';
+        cardImg.style.height = '195px';
         cardImg.style.margin = '5px';
         document.querySelector(activePlayer['div']).appendChild(cardImg);
         hitSound.play();
@@ -139,7 +146,7 @@ async function dealerTimePlay(){
 
     if(YOU['score'] !== 0){
         blackjackGame['isStand'] = true;        
-        while(DEALER['score'] <= 15 && blackjackGame['isStand'] === true){
+        while(DEALER['score'] < 16 && blackjackGame['isStand'] === true){
             let card = randomCard();
             showCard(DEALER, card);
             updateScore(DEALER, card);
@@ -295,7 +302,8 @@ function showGeneralWinner(generalWinner){
         roundDraw.pause();
         gameOver.play();
     }
-
+ 
+    document.body.style.marginTop = "60px";
    
     const resultsWrapper = document.getElementById('general');
 
@@ -369,3 +377,165 @@ function playAgain(){
     }
 
 }
+
+       
+instructionBtn.forEach(btn => {
+
+    btn.addEventListener('click', (e) => {
+        const btn_clicked = e.target;
+        let role = btn_clicked.getAttribute('job');
+
+        if (role === 'help') {
+            getHelp(role);
+        } 
+        else {
+            getTips(role);
+        }                
+        
+    })
+
+});
+
+function getHelp(role){
+    /*fetch*/ 
+    async function giveHelp() {
+        const response = await fetch('user/help.json');
+        const help = await response.json()
+
+        return {
+            help
+        }
+    }
+    giveHelp()
+        .then(help => {
+            modalTitle.innerText = `Welcome to ${role} Our Blackjack Player!`;
+            contentHead.innerText = `Get ${role}?`; 
+            let point;
+
+            point = `<ul>`;
+            help.help.forEach(helpIndex => {
+                point += `
+                    <li>
+                        <p>${helpIndex.help}</p>
+                    </li>
+                `;
+            })
+            point += `</ul>`;
+            
+            modalContent.innerHTML = point;
+        })
+        .catch(error => { console.log(error) });
+    
+    /*
+    modalTitle.innerText = `Welcome to ${role} Our Blackjack Player!`;
+    contentHead.innerText = `Get ${role}?`;  
+    modalContent.innerHTML = `
+        <ul style="list-style: disc;">
+            <li>
+                <p class="">The game consist of two players: Human player and the Dealer</p>
+            </li>
+            <li>
+                <p class="">
+                    The human player plays by HIT button: (blue in color). He or she should target 
+                    highest score that is below twenty one.  
+                </p>
+            </li>
+            <li>
+                <p class="">
+                    Once he/she is through, then he/she hits the stand button and the Bot plays.
+                </p>
+            </li>
+            <li>
+                <p class="">
+                    The final results of the round are calculated once Bot is through. Whoever has HIGHEST score is 
+                    declared as the winner of the round. 
+                </p>
+            </li>
+            <li>
+                <p class="">
+                    However there are a maximum of Ten rounds. The game may either end in ten rounds if the game 
+                    is tight, or end before all the ten rounds are over incase the score difference between the players 
+                    is high. 
+                </p>
+            </li>
+            <li>
+                <p class="">
+                    Good luck friend as you play! 
+                </p>
+            </li>
+        </ul>       
+    `;
+    */
+       
+}
+
+function getTips(role) {
+    // ajax
+    const xhr = new XMLHttpRequest();
+
+    xhr.open('GET', 'user/tips.json', true);
+
+    xhr.onload = function(){
+        
+        if (this.status === 200) {
+
+            const tips = JSON.parse(this.responseText);
+            
+            modalTitle.innerText = `Welcome to ${role} Our Blackjack Player!`;
+            contentHead.innerText = `Get ${role}?`;
+            let tipsA;
+            tipsA = `<ul>`
+                tips.forEach(tip => {
+                    tipsA += `
+                    
+                    <li>
+                            <p>${tip.tip}</p>
+                        </li> 
+                
+                    `; 
+                });
+            tipsA += `</ul>`;
+
+            modalContent.innerHTML = tipsA;
+            
+        }
+        
+    }
+
+    xhr.send();
+
+    /*
+    modalTitle.innerText = `Welcome to ${role} Our Blackjack Player!`;
+    contentHead.innerText = `Get ${role}?`;
+    modalContent.innerHTML = `
+        <ul style="list-style: ;">
+            <li>
+                <p class="">
+                    The game consist of two players: Human player and the Dealer. These tips may help you beat Dealer.
+                </p>
+           
+            <li>
+                <p class="">
+                    Be Courageous, Daring and ready to risk any score below seventeen.  
+                </p>
+            </li>
+            <li>
+                <p class="">
+                    Be Careful when risking scores above seventeen.  
+                </p>
+            </li>
+            <li>
+                <p class="">
+                    These are just tips from some of the best players. If they don't work for you friend, play your way.  
+                </p>
+            </li>
+            <li>
+                <p class="">
+                    Good luck friend as you play! 
+                </p>
+            </li>
+        </ul>       
+    `;
+    */
+}
+        

@@ -16,20 +16,25 @@
 </head>
 <body>
 
-    <div class="container mt-1">
-        <h4 class="text-center text-success">BLACKJACK GAME</h4>
-        <div id="game-container" class="px-5 mt-0">            
-            <div class="">
-                <div class="row" id="user-assist">
-                    <div class="col-6">
-                        <button class="btn-sm btn-outline-success">help</button>
-                    </div>
-                    <div class="col-6 text-right">
-                        <button class="btn-sm btn-outline-danger">tips</button>
-                    </div>
-                </div>
-                <h6 class="text-center py-1 text-dark"><span id="game-results">Let's play</span></h6>
+    <div class="container mt-2">        
+        <div class="row" id="user-assist">
+            <div class="col-4">
+                <button class="to-user btn-sm btn-outline-success" job="help" data-toggle="modal"
+                    data-target="#user-modal">help</button>
             </div>
+            <div class="col-4 text-center">
+                <h4 class="text-center text-success">BLACKJACK GAME</h4>
+            </div>
+            <div class="col-4 text-right">
+                <button class="to-user btn-sm btn-outline-danger" job="tips" data-toggle="modal"
+                    data-target="#user-modal">tips</button>
+            </div>
+        </div>           
+        
+        <div id="game-container" class="px-5 mt-0">            
+            <div class="round-results">
+                <h6 class="text-center py-1 text-dark"><span id="game-results">Let's play</span></h6>
+            </div>            
             <!-- cards -->
             <div class="row d-flex justify-content-around" id="green_div">
                 <div id="your-box" class="border-right">
@@ -39,16 +44,15 @@
                     <h4 class="text-white">DEALER: <span id="dealer-black-jack-score">0</span></h4>
                 </div>
             </div>
-            <div id="general" class="row d-flex justify-content-center">
+            <div id="general" class="row d-flex justify-content-center"></div>
                 
-            </div>
-
             <!-- buttons -->
             <div class="row d-flex justify-content-center" id="row-btn">
                 <button class="btn-lg btn-primary" id="hit-button">hit</button>
                 <button class="btn-lg btn-warning" id="stand-button">stand</button>
                 <button class="btn-lg btn-danger" id="deal-button">deal</button>
             </div>
+
             <!-- results -->
             <div class="row d-flex justify-content-center mt-2" id="general-results">
                 <table class="table-bordered table-one">
@@ -70,12 +74,32 @@
         </div>
     </div>
 
+    <!-- user instruction modal -->
+    <div class="modal fade" id="user-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header alert-success">
+                    <h5 class="modal-title text-capitalize"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h6></h6>
+                    <div class="instructions"></div>
+                </div>
+                <div class="modal-footer alert-secondary">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
+                </div>
+            </div>    
+        </div>
+    </div>
+
     <!-- app js -->
     <script src="js/app.js"></script>
     <!--jquery-->
     <script src="./js/jquery-3.4.1.min.js"></script>
     <!--bootsrap js-->
-    <script src="./js/bootstrap.bundle.min.js"></script>
-    
+    <script src="./js/bootstrap.bundle.min.js"></script>    
 </body>
 </html>

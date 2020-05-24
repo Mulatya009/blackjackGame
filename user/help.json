@@ -1,0 +1,31 @@
+[
+    {
+        "id" : 1,
+        "help" : "The game consist of two players: Human player and the Dealer."
+    },
+
+    {
+        "id": 2,
+        "help": "The human player plays by HIT button: (blue in color). He or she should target highest score that is below twenty one. "
+    },
+
+    {
+        "id": 3,
+        "help": "Once he/she is through, then he/she hits the stand button and the Bot plays."
+    },
+
+    {
+        "id": 4,
+        "help": "The final results of the round are calculated once Bot is through. Whoever has HIGHEST score is declared as the winner of the round."
+    },
+
+    {
+        "id": 5,
+        "help": "However there are a maximum of Ten rounds. The game may either end in ten rounds if the game is tight, or end before all the ten rounds are over incase the score difference between the players is high."
+    },
+
+    {
+        "id": 6,
+        "help": "Good luck friend as you play!"
+    }
+]
