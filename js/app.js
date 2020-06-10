@@ -258,7 +258,7 @@ function showResult(winner) {
 }
 
 function generalWinner() {
-  const totalGames = 2;
+  const totalGames = 10;
   blackjackGame["total"] = totalGames;
 
   if (
