@@ -1,35 +1,84 @@
-#green_div{
-    background-image: url("../images/bg.jpg");
-    padding: 2px;
-    height: 450px;
+#green_div {
+  background-image: url("../images/bg.jpg");
+  padding: 2px;
+  height: 450px;
 }
 
-#green_div div{
-    padding: 5px;
-    flex: 1;
-    text-align: center;
+#green_div div {
+  padding: 5px;
+  flex: 1;
+  text-align: center;
 }
 
-#general{
-    height: 450px;
+#your-box img,
+#dealer-box img {
+  height: 195px;
+}
+
+#general {
+  height: 450px;
+  position: relative;
+  margin-top: -450px;
+}
+
+#general div {
+  height: 450px;
+  width: 100%;
+  background-color: rgba(230, 230, 230, 0.95752);
+}
+
+#row-btn {
+  background-image: url("../images/bg.jpg");
+}
+
+#row-btn button {
+  margin: 5px;
+}
+.table-two {
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+/* ************MEDIA SCREENS************** */
+@media screen and (max-width: 800px) {
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 1rem;
+  }
+  h4 {
+    font-size: 1rem;
+  }
+  body {
+    font-size: 0.85rem;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 0.5;
+  }
+}
+@media screen and (max-width: 992px) {
+  #green_div {
+    height: 250px;
+  }
+  #general {
+    height: 250px;
     position: relative;
-    margin-top: -450px;
-}
-
-#general div{
-    height: 448px;
+    margin-top: -250px;
+  }
+  #your-box img,
+  #dealer-box img {
+    height: 96px;
+  }
+  #general div {
+    height: 300px;
     width: 100%;
-    background-color: rgba(230, 230, 230, .95752);
-}
-
-#row-btn{
-    background-image: url("../images/bg.jpg");
-}
-
-#row-btn button{
-    margin: 5px;
-}
-.table-two{
-    margin: 0 auto;
-    margin-bottom: 10px;
+    padding: 5px;
+    background-color: rgba(230, 230, 230, 0.95752);
+  }
 }
